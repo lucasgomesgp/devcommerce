@@ -1,0 +1,52 @@
+@import "../../variables";
+
+.container {
+    background-color: $primary;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: $white;
+    border-radius: 10px;
+    width: 25rem;
+    height: 28rem;
+    padding: 1rem;
+    gap: 36px;
+
+    .logo{
+        padding-top: 3rem;
+    }
+
+    .inpt{
+        width: 80%;
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid $black;
+        outline: none;
+        font-size: 1rem;
+        font-weight: bold;
+
+        &::placeholder{
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
+
+    .btnLogin{
+        background-color: $primary;
+        color: $white;
+        width: 80%;
+        height: 3.75rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+    }
+}

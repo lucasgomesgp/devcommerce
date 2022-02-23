@@ -1,0 +1,69 @@
+@import "../../variables";
+
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $primary;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    .shop{
+        cursor: pointer;
+        position: relative;
+        background: none;
+        border: none;
+        .itemCount{
+            position: absolute;
+            background-color: $danger;
+            width: 20px;
+            height: 20px;
+            right: 0;
+            top: -2px;
+            border-radius: 50%;
+            text-align: center;
+            color: $white;
+        }
+    }
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+
+    .logo{
+        cursor: pointer;
+    }
+}
+
+.items{
+    li{
+        padding-left: 4rem;
+        list-style: none;
+        font-weight: 500;
+        font-size: 1.2rem;
+        p{
+            color: $white;
+            cursor: pointer;
+        }
+    }
+}
+
+
+@media screen and (max-width: 460px){
+    .nav{
+        padding: 0;
+    }
+    .items{
+        li{
+            display: none;
+        }
+    }
+    .shop{
+        display: none;
+    }
+}

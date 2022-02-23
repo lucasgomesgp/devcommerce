@@ -1,0 +1,69 @@
+@import "../../variables";
+
+.shopItems{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 8rem 2rem;
+
+    .item{
+        width: 100%;
+        border: 1px solid $dark-slide;
+        padding: 0.5rem;
+        .itemInfo{
+            display: flex;
+            gap: 1rem;
+            .itemImg{
+                .img{
+                    width: 220px;
+                    max-width: 50%;
+                    margin-left: 1rem;
+                }
+            }
+            .infos{
+                display: flex;
+                flex-direction: column;
+                .text{
+                    margin-top: 1rem;
+                }
+
+                .remove{
+                    color: $danger;
+                    text-decoration: underline;
+                    margin-top: 0.8rem;
+                    background: none;
+                    border: none;
+                    text-align: left;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .emptyImg{
+        width: 20%;
+        margin: 0 auto;
+    }
+    .total{
+        align-self: flex-end;
+        margin-top: 1rem;
+    }
+    .btns{
+        display: flex;
+        width: 100%;
+        padding-top: 1rem;
+        justify-content: space-between;
+
+        .btn{
+            width: 14rem;
+            height: 3rem;
+            text-align: center;
+            color: $white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}

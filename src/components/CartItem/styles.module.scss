@@ -1,0 +1,68 @@
+@import "../../variables";
+
+.item {
+    width: 21rem;
+    max-width: 80%;
+    box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+
+    .infos {
+        width: 100%;
+        text-align: center;
+
+        p {
+            margin-top: 0.8rem;
+            font-weight: bold;
+        }
+    }
+
+    .infosItem {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        .from,
+        .to {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .from {
+            color: $danger;
+            text-decoration: line-through;
+        }
+        .to {
+            color: $success;
+        }
+    }
+
+    .btnCart {
+        margin-top: 3.4rem;
+        width: 90%;
+        padding: 0.4rem;
+        border: none;
+        background-color: $primary;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+
+        span {
+            font-size: 1.1rem;
+        }
+
+        &:disabled{
+            filter: opacity(0.5);
+            cursor: not-allowed;
+        }
+    }
+}
