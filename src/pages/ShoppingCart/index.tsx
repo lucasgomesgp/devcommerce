@@ -5,10 +5,11 @@ import { useShop } from "../../hooks/useShop";
 import emptyImg from "../../assets/empty.svg";
 import styles from "./styles.module.scss";
 
-export function ShoppinCart() {
+export function ShoppingCart() {
     const navigate = useNavigate();
     const { items, setItems } = useShop();
     let total = 0;
+
     function handleRemove(id: number) {
         const newItems = items.filter((item) => item.id !== id);
         localStorage.setItem("PRODUCTS", JSON.stringify(newItems));
@@ -57,39 +58,78 @@ export function ShoppinCart() {
                                             Remover
                                         </button>
                                     </div>
+                                    <div className={styles.qtd}>
+                                        <p className={styles.qtdText}>
+                                            Quantidade
+                                        </p>
+                                        <button
+                                            type="button"
+                                            className={`${styles.btnQtd} ${styles.danger}`}
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            type="text"
+                                            disabled
+                                            value={item.quant}
+                                            className={styles.inptQtd}
+                                        />
+                                        <button
+                                            type="button"
+                                            className={`${styles.btnQtd} ${styles.success}`}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
                             </section>
                         );
                     })
                 ) : (
-                    <>
-                        <h2>Vazio</h2>
+                    <section className={styles.empty}>
+                        <h2 className={styles.emptyText}>
+                            Seu carrinho está vazio
+                        </h2>
                         <img
                             src={emptyImg}
                             alt="Carrinho vazio"
                             className={styles.emptyImg}
                         />
+                        <button
+                            type="button"
+                            onClick={() => {
+                                navigate("/home");
+                            }}
+                        >
+                            Adicionar itens
+                        </button>
+                    </section>
+                )}
+                {items.length === 0 ? (
+                    ""
+                ) : (
+                    <>
+                        <h3 className={styles.total}>Total: R${total}</h3>
+                        <div className={styles.btns}>
+                            <button
+                                onClick={() => navigate("/home")}
+                                className={styles.btn}
+                                style={{ backgroundColor: "red" }}
+                                type="button"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={() => navigate("/info")}
+                                className={styles.btn}
+                                style={{ backgroundColor: "green" }}
+                                type="button"
+                            >
+                                Finalizar
+                            </button>
+                        </div>
                     </>
                 )}
-                <h3 className={styles.total}>Total: R${total}</h3>
-                <div className={styles.btns}>
-                    <button
-                        onClick={() => navigate("/home")}
-                        className={styles.btn}
-                        style={{ backgroundColor: "red" }}
-                        type="button"
-                    >
-                        Cancelar
-                    </button>
-                    <button
-                        onClick={() => navigate("/home")}
-                        className={styles.btn}
-                        style={{ backgroundColor: "green" }}
-                        type="button"
-                    >
-                        Finalizar
-                    </button>
-                </div>
             </main>
         </>
     );

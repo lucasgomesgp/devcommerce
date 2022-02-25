@@ -11,15 +11,13 @@ export function Header() {
     const { items } = useShop();
     return (
         <header className={styles.header}>
-            <nav className={styles.nav}>
-                <a href="/home" className={styles.logo}>
-                    <img src={logoImg} alt="Logo DevCommerce" />
-                </a>
-                <ul className={styles.items}>
-                    <li>
-                        <p onClick={() => navigate("/home")}>Home</p>
-                    </li>
-                </ul>
+            <nav
+                className={styles.nav}
+                onClick={() => {
+                    navigate("/home");
+                }}
+            >
+                <img src={logoImg} alt="Logo DevCommerce" />
             </nav>
             <button
                 type="button"

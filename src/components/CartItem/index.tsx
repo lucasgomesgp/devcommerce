@@ -1,5 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import { toast } from "react-toastify";
-import { useState } from "react";
 import styles from "./styles.module.scss";
 import addCartImg from "../../assets/addCart.svg";
 import { Item } from "../../pages/Home/Home.types";
@@ -7,19 +8,27 @@ import { useShop } from "../../hooks/useShop";
 
 export function CartItem({ id, from, to, src, name, quant }: Item) {
     const { items, setItems } = useShop();
-    const [isAdded, setIsAdded] = useState(false);
-    async function handleSendItem() {
+
+    function handleSendItem() {
         const newItem = { id, from, to, src, name, quant };
+        const equalItems = items.filter((item) => item.id === id);
+
         if (items.length === 0) {
             localStorage.setItem("PRODUCTS", JSON.stringify([newItem]));
             setItems([newItem]);
-            setIsAdded(true);
-        } else {
-            setItems([...items, newItem]);
-            const item = [...items, newItem];
-            localStorage.setItem("PRODUCTS", JSON.stringify(item));
-            setIsAdded(true);
         }
+
+        if (equalItems.length > 0) {
+            const itemCurrent = items.map((item) => {
+                if (item.id === id) {
+                    return { ...newItem, quant: quant + 1 };
+                }
+            });
+            console.log(itemCurrent);
+            localStorage.setItem("PRODUCTS", JSON.stringify([{ itemCurrent }]));
+            // setItems(itemCurrent);
+        }
+
         toast.success(`${name} adicionado ao carrinho!`);
     }
     return (
@@ -48,7 +57,6 @@ export function CartItem({ id, from, to, src, name, quant }: Item) {
                 type="button"
                 className={styles.btnCart}
                 onClick={handleSendItem}
-                disabled={isAdded}
             >
                 <img src={addCartImg} alt="Adicionar ao carrinho" />
                 <span>Adicionar ao carrinho</span>

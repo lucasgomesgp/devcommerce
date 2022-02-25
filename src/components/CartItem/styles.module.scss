@@ -60,9 +60,5 @@
             font-size: 1.1rem;
         }
 
-        &:disabled{
-            filter: opacity(0.5);
-            cursor: not-allowed;
-        }
     }
 }

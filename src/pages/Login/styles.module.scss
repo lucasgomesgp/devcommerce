@@ -7,9 +7,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(94deg, rgba(54, 63, 235, 1) 0%, rgba(48, 113, 209, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    animation: bgAnimated ease alternate 5s infinite;
+    background-size: 300% 300%;
 }
 
-.form{
+.form {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -20,11 +23,16 @@
     padding: 1rem;
     gap: 36px;
 
-    .logo{
-        padding-top: 3rem;
+    .mug {
+        margin-top: 1rem;
+        animation: logoAnimated 800ms ease forwards;
+
+        &:hover #coffe {
+            filter: brightness(1.2);
+        }
     }
 
-    .inpt{
+    .inpt {
         width: 80%;
         padding: 1rem;
         border-radius: 10px;
@@ -33,13 +41,13 @@
         font-size: 1rem;
         font-weight: bold;
 
-        &::placeholder{
+        &::placeholder {
             font-size: 1rem;
             font-weight: bold;
         }
     }
 
-    .btnLogin{
+    .btnLogin {
         background-color: $primary;
         color: $white;
         width: 80%;
@@ -48,5 +56,28 @@
         border-radius: 10px;
         border: none;
         cursor: pointer;
+    }
+}
+
+@keyframes logoAnimated {
+    0% {
+        opacity: 0;
+        transform: rotate(0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bgAnimated {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 50% 75%;
+    }
+    100% {
+        background-position: 25% 100%;
     }
 }

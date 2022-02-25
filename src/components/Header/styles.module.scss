@@ -1,6 +1,6 @@
 @import "../../variables";
 
-.header{
+.header {
     width: 100%;
     display: flex;
     align-items: center;
@@ -11,12 +11,12 @@
     top: 0;
     z-index: 10;
 
-    .shop{
+    .shop {
         cursor: pointer;
         position: relative;
         background: none;
         border: none;
-        .itemCount{
+        .itemCount {
             position: absolute;
             background-color: $danger;
             width: 20px;
@@ -30,40 +30,36 @@
     }
 }
 
-.nav{
+.nav {
     display: flex;
     align-items: center;
     padding-left: 1rem;
-
-    .logo{
-        cursor: pointer;
-    }
+    cursor: pointer;
 }
 
-.items{
-    li{
+.items {
+    li {
         padding-left: 4rem;
         list-style: none;
         font-weight: 500;
         font-size: 1.2rem;
-        p{
+        p {
             color: $white;
             cursor: pointer;
         }
     }
 }
 
-
-@media screen and (max-width: 460px){
-    .nav{
+@media screen and (max-width: 460px) {
+    .nav {
         padding: 0;
     }
-    .items{
-        li{
+    .items {
+        li {
             display: none;
         }
     }
-    .shop{
+    .shop {
         display: none;
     }
 }

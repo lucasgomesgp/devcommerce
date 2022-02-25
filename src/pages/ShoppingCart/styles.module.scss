@@ -1,33 +1,35 @@
 @import "../../variables";
 
-.shopItems{
+.shopItems {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     padding: 8rem 2rem;
 
-    .item{
+    .item {
         width: 100%;
         border: 1px solid $dark-slide;
         padding: 0.5rem;
-        .itemInfo{
+
+        .itemInfo {
             display: flex;
-            gap: 1rem;
-            .itemImg{
-                .img{
+            justify-content: space-between;
+
+            .itemImg {
+                .img {
                     width: 220px;
                     max-width: 50%;
                     margin-left: 1rem;
                 }
             }
-            .infos{
-                display: flex;
-                flex-direction: column;
-                .text{
+            .infos {
+                flex: 0.8;
+
+                .text {
                     margin-top: 1rem;
                 }
 
-                .remove{
+                .remove {
                     color: $danger;
                     text-decoration: underline;
                     margin-top: 0.8rem;
@@ -37,24 +39,82 @@
                     cursor: pointer;
                 }
             }
+            .qtd {
+                align-self: center;
+
+                .qtdText {
+                    text-align: center;
+                }
+                .inptQtd {
+                    width: 40px;
+                    height: 30px;
+                    text-align: center;
+                    font-size: 1rem;
+                    font-weight: bold;
+                }
+                .btnQtd {
+                    width: 40px;
+                    height: 30px;
+                    cursor: pointer;
+                    border: none;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    transition: all 0.5s ease;
+                }
+                .success {
+                    &:hover {
+                        background-color: $success;
+                        color: #fff;
+                    }
+                }
+                .danger {
+                    &:hover {
+                        background-color: $danger;
+                        color: #fff;
+                    }
+                }
+            }
         }
     }
 
-    .emptyImg{
-        width: 20%;
-        margin: 0 auto;
+    .empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+
+        .emptyText {
+            text-align: center;
+            width: 100%;
+            padding-bottom: 2rem;
+        }
+
+        .emptyImg {
+            width: 20%;
+            margin: 0 auto;
+        }
+        button {
+            background-color: $success;
+            padding: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 20%;
+            margin: 2rem auto;
+            color: #fff;
+            font-size: 1.4rem;
+        }
     }
-    .total{
+    .total {
         align-self: flex-end;
         margin-top: 1rem;
     }
-    .btns{
+    .btns {
         display: flex;
         width: 100%;
         padding-top: 1rem;
         justify-content: space-between;
 
-        .btn{
+        .btn {
             width: 14rem;
             height: 3rem;
             text-align: center;

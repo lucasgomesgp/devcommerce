@@ -10,8 +10,8 @@ export function Home() {
     const [allItems, setAllItems] = useState<Item[]>([]);
     async function getData() {
         try {
-            const { data } = await api.get<Item[]>("/items");
-            setAllItems(data);
+            const items = await api.get("/items");
+            setAllItems(items.data.items);
         } catch (err) {
             console.log("Erro");
         }
@@ -35,19 +35,21 @@ export function Home() {
             <article className={styles.items}>
                 <h2 className={styles.title}>Ofertas</h2>
                 <div className={styles.subSections}>
-                    {allItems
-                        ? allItems.map((item) => (
-                              <CartItem
-                                  key={item.id}
-                                  name={item.name}
-                                  id={item.id}
-                                  src={item.src}
-                                  from={item.from}
-                                  to={item.to}
-                                  quant={item.quant}
-                              />
-                          ))
-                        : "Sem itens no momento"}
+                    {allItems.length ? (
+                        allItems.map((item) => (
+                            <CartItem
+                                key={item.id}
+                                name={item.name}
+                                id={item.id}
+                                src={item.src}
+                                from={item.from}
+                                to={item.to}
+                                quant={item.quant}
+                            />
+                        ))
+                    ) : (
+                        <div className={styles.loading} />
+                    )}
                 </div>
             </article>
         </>

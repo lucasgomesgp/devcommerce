@@ -22,6 +22,8 @@
     .mug {
         max-width: 100%;
         text-align: center;
+        position: relative;
+        right: -38px;
     }
 }
 .title {
@@ -46,11 +48,30 @@
         gap: 3.75rem;
         flex-wrap: wrap;
     }
+
+    .loading{
+        width: 5rem;
+        height: 5rem;
+        border: 10px solid $dark-slide;
+        border-radius: 50%;
+        border-top: 10px solid $primary;
+        animation: turnCircle linear 700ms infinite ;
+    }
 }
 
 @media screen and (max-width: 425px) {
     .title,
     .mug {
         padding-left: 1rem;
+    }
+}
+
+
+@keyframes turnCircle{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(1turn);
     }
 }

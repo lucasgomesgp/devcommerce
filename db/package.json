@@ -4,9 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-      "start": "json-server database.json --watch --port 3001"
+    "start": "node index.js"
   },
   "devDependencies": {
     "json-server": "^0.17.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "uuid": "^8.3.2"
   }
 }

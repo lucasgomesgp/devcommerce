@@ -1,0 +1,92 @@
+@import "../../variables";
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 4rem auto;
+    gap: 2rem;
+    box-shadow: 0 0 4px 1px $black;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 80%;
+
+    .infosForm{
+        display: flex;
+        width: 80%;
+        justify-content: center;
+    }
+    .title{
+        margin-top: 1rem;
+        font-weight: 500;
+        font-size: 1.8rem;
+    }
+    .groupForm{
+        display: flex;
+        justify-content: space-around;
+        gap: 4rem;
+        width: 80%;
+        flex-wrap: wrap;
+    }
+
+    .inptForm{
+        height: 3rem;
+        padding: 1rem;
+        flex: 1;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.7);
+        outline: none;
+        font-size: 1rem;
+        font-weight: bold;
+        color: $black;
+    }
+
+    .groupCol{
+        margin-top: 2rem;
+        align-self: start;
+        margin: 0 auto;
+
+        .separator{
+            display: flex;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .titleSection{
+            font-size: 1.2rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .cep{
+            margin-top: 2rem;
+        }
+
+    }
+
+    .cepArea{
+        display: flex;
+        justify-content: space-around;
+        gap: 8rem;
+        flex-wrap: wrap;
+
+        .infosCep{
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+    .sendBtn{
+        background-color: $success;
+        color: $white;
+        align-self: flex-end;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-right: 2rem;
+    }
+}

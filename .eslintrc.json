@@ -38,6 +38,7 @@
         "lines-between-class-members": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-no-constructed-context-values": "error",
+        "@typescript-eslint/no-explicit-any": "off",
         "import/extensions": [
             "error",
             "ignorePackages",
