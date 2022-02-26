@@ -4,5 +4,5 @@ export type Item = {
     from: number;
     to: number;
     name: string;
-    quant: number;
+    quant?: number;
 };

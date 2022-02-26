@@ -1,34 +1,40 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 import { toast } from "react-toastify";
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import addCartImg from "../../assets/addCart.svg";
 import { Item } from "../../pages/Home/Home.types";
 import { useShop } from "../../hooks/useShop";
+import { setItem } from "../../storage";
 
-export function CartItem({ id, from, to, src, name, quant }: Item) {
+export function CartItem({ id, from, to, src, name }: Item) {
     const { items, setItems } = useShop();
+    const [quantCount, setQuantCount] = useState(1);
 
     function handleSendItem() {
-        const newItem = { id, from, to, src, name, quant };
-        const equalItems = items.filter((item) => item.id === id);
-
+        const newItem = { id, from, to, src, name, quant: quantCount };
+        const findEqualItemInArray = items.filter((item) => item.id === id);
         if (items.length === 0) {
-            localStorage.setItem("PRODUCTS", JSON.stringify([newItem]));
+            setItem("PRODUCTS", [newItem]);
             setItems([newItem]);
         }
-
-        if (equalItems.length > 0) {
-            const itemCurrent = items.map((item) => {
-                if (item.id === id) {
-                    return { ...newItem, quant: quant + 1 };
-                }
-            });
-            console.log(itemCurrent);
-            localStorage.setItem("PRODUCTS", JSON.stringify([{ itemCurrent }]));
-            // setItems(itemCurrent);
+        if (items.length > 0 && findEqualItemInArray) {
+            setQuantCount(quantCount + 1);
+            console.log(quantCount);
+            const newArray = items.filter((item) => item.id !== id);
+            setItem("PRODUCTS", [
+                ...newArray,
+                { ...newItem, quant: quantCount },
+            ]);
+            setItems([...newArray, { ...newItem, quant: quantCount }]);
         }
-
+        if (items.length > 0 && !findEqualItemInArray) {
+            setItem("PRODUCTS", [...items, newItem]);
+            setItems([...items, newItem]);
+        }
         toast.success(`${name} adicionado ao carrinho!`);
     }
     return (

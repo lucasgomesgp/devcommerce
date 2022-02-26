@@ -26,8 +26,7 @@
     ],
     "rules": {
         "camelcase": "off",
-        "import/no-unresolved": "error",
-        "no-unused-vars": "off",
+        "import/no-unresolved": "off",
         "react/jsx-filename-extension": "off",
         "class-methods-use-this": "off",
         "import/prefer-default-export": "off",
@@ -39,6 +38,7 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-no-constructed-context-values": "error",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
         "import/extensions": [
             "error",
             "ignorePackages",

@@ -1,6 +1,6 @@
 @import "../../variables";
 
-.form{
+.form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,17 +12,17 @@
     border-radius: 10px;
     width: 80%;
 
-    .infosForm{
+    .infosForm {
         display: flex;
         width: 80%;
         justify-content: center;
     }
-    .title{
+    .title {
         margin-top: 1rem;
         font-weight: 500;
         font-size: 1.8rem;
     }
-    .groupForm{
+    .groupForm {
         display: flex;
         justify-content: space-around;
         gap: 4rem;
@@ -30,7 +30,7 @@
         flex-wrap: wrap;
     }
 
-    .inptForm{
+    .inptForm {
         height: 3rem;
         padding: 1rem;
         flex: 1;
@@ -42,42 +42,52 @@
         color: $black;
     }
 
-    .groupCol{
+    .groupCol {
         margin-top: 2rem;
         align-self: start;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
 
-        .separator{
+        .separator {
             display: flex;
             margin: 0 auto;
             justify-content: center;
             align-items: center;
+            flex: 1;
         }
 
-        .titleSection{
+        .titleSection {
             font-size: 1.2rem;
             font-weight: 500;
             flex: 1;
         }
 
-        .cep{
+        .cep {
             margin-top: 2rem;
         }
-
     }
 
-    .cepArea{
+    .cepArea {
         display: flex;
-        justify-content: space-around;
-        gap: 8rem;
+        gap: 12rem;
         flex-wrap: wrap;
+        justify-content: space-around;
+        width: 65%;
 
-        .infosCep{
+        .infosCep {
             margin-top: 1rem;
             font-size: 1.2rem;
+            flex: 1;
+            text-align: center;
+
+            .cepMessage {
+                text-align: center;
+            }
         }
     }
-    .sendBtn{
+    .sendBtn {
         background-color: $success;
         color: $white;
         align-self: flex-end;

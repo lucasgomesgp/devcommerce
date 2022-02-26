@@ -3,18 +3,21 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import App from "./App";
+import { ShopProvider } from "./hooks/useShop";
+import { UserProvider } from "./hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import "./global.scss";
-import { ShopProvider } from "./hooks/useShop";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <UserProvider>
             <ShopProvider>
-                <App />
-                <ToastContainer position="top-right" autoClose={1500} />
+                <BrowserRouter>
+                    <App />
+                    <ToastContainer position="top-right" autoClose={1500} />
+                </BrowserRouter>
             </ShopProvider>
-        </BrowserRouter>
+        </UserProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

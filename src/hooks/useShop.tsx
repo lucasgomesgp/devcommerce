@@ -4,9 +4,12 @@ import {
     ReactNode,
     SetStateAction,
     useContext,
+    useEffect,
+    useMemo,
     useState,
 } from "react";
 import { Item } from "../pages/Home/Home.types";
+import { getItem } from "../storage";
 
 type ContextProps = {
     children: ReactNode;
@@ -20,9 +23,16 @@ export const ShopContext = createContext({} as ShopTypes);
 
 export function ShopProvider({ children }: ContextProps) {
     const [items, setItems] = useState<Item[]>([]);
+    const itemStorage = useMemo(() => ({ items, setItems }), [items, setItems]);
+
+    useEffect(() => {
+        const storageItems = getItem("PRODUCTS");
+        if (storageItems) {
+            setItems(storageItems);
+        }
+    }, []);
     return (
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <ShopContext.Provider value={{ items, setItems }}>
+        <ShopContext.Provider value={itemStorage}>
             {children}
         </ShopContext.Provider>
     );

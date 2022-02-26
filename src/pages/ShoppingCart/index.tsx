@@ -21,7 +21,7 @@ export function ShoppingCart() {
             <main className={styles.shopItems}>
                 {items.length >= 1 ? (
                     items.map((item) => {
-                        total += item.to * item.quant;
+                        total += item.to * (item.quant || 1);
                         return (
                             <section
                                 className={styles.item}

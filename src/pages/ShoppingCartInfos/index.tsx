@@ -1,5 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import * as yup from "yup";
 import { Header } from "../../components/Header";
 import { HeaderShop } from "../../components/HeaderShop";
 import { cepApi } from "../../service/cep";
@@ -9,7 +11,14 @@ import styles from "./styles.module.scss";
 export function ShoppingCartInfos() {
     const [cep, setCep] = useState<Cep>({} as Cep);
     const [cepLocal, setCepLocal] = useState("");
+    const [name, setName] = useState("");
+    const [lastName, setLastName] = useState("");
     const navigate = useNavigate();
+
+    const shopSchema = yup.object({
+        lastName: yup.string().required("O sobrenome é obrigatório"),
+        name: yup.string().required("O nome é obrigatório"),
+    });
 
     async function handleSendCep(event?: SyntheticEvent) {
         event?.preventDefault();
@@ -17,7 +26,18 @@ export function ShoppingCartInfos() {
             const { data } = await cepApi.get(`${cepLocal}/json`);
             setCep(data);
         } catch (err) {
-            console.log("Erro");
+            toast.error("Erro ao buscar o CEP");
+        }
+    }
+
+    async function handleSubmit(event: SyntheticEvent) {
+        event.preventDefault();
+        try {
+            await shopSchema.validate({ name, lastName });
+            toast.success("Passo 2 concluído");
+            navigate("/card");
+        } catch (err: yup.ValidationError | any) {
+            toast.error(err.message);
         }
     }
     useEffect(() => {
@@ -27,7 +47,6 @@ export function ShoppingCartInfos() {
         if (cepLocal.length === 0) {
             setCep({} as Cep);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cepLocal]);
 
     return (
@@ -36,7 +55,7 @@ export function ShoppingCartInfos() {
             <HeaderShop activeInfo />
             <main className={styles.form}>
                 <h2 className={styles.title}>Informações</h2>
-                <form className={styles.infosForm}>
+                <form className={styles.infosForm} onSubmit={handleSubmit}>
                     <div className={styles.groupForm}>
                         <input
                             type="text"
@@ -44,6 +63,10 @@ export function ShoppingCartInfos() {
                             placeholder="Nome"
                             className={`${styles.inptForm} ${styles.inpt}`}
                             autoComplete="off"
+                            onChange={(event) => {
+                                setName(event.target.value);
+                            }}
+                            value={name}
                         />
                         <input
                             type="text"
@@ -51,6 +74,10 @@ export function ShoppingCartInfos() {
                             placeholder="Sobrenome"
                             className={`${styles.inptForm} ${styles.inpt}`}
                             autoComplete="off"
+                            onChange={(event) => {
+                                setLastName(event.target.value);
+                            }}
+                            value={lastName}
                         />
                     </div>
                 </form>
@@ -89,14 +116,16 @@ export function ShoppingCartInfos() {
                                 <p>{cep.bairro}</p>
                             </>
                         ) : (
-                            "Informações do seu CEP"
+                            <p className={styles.cepMessage}>
+                                Informações do seu CEP
+                            </p>
                         )}
                     </div>
                 </div>
                 <button
                     type="submit"
                     className={styles.sendBtn}
-                    onClick={() => navigate("/card")}
+                    onClick={handleSubmit}
                 >
                     Continuar
                 </button>

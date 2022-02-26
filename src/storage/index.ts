@@ -1,8 +1,9 @@
 import { Item } from "../pages/Home/Home.types";
 
-function getItem(item: string) {
+function getItem(item: string): Item[] {
     const product = localStorage.getItem(item);
-    return product;
+    const result = product ? JSON.parse(product) : [];
+    return result;
 }
 
 function setItem(item: string, value: Item | Item[]) {

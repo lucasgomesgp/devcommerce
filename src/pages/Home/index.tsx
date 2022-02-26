@@ -44,7 +44,6 @@ export function Home() {
                                 src={item.src}
                                 from={item.from}
                                 to={item.to}
-                                quant={item.quant}
                             />
                         ))
                     ) : (

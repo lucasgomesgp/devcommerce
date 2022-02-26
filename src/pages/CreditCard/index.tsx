@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-boolean-value */
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, SyntheticEvent, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import chipImg from "../../assets/chip.png";
 import styles from "./styles.module.scss";
 import { HeaderShop } from "../../components/HeaderShop";
 
 export function CreditCard() {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [month, setMonth] = useState("");
@@ -13,17 +16,23 @@ export function CreditCard() {
     const [cvv, setCvv] = useState("");
     const cvvRef = useRef() as MutableRefObject<HTMLInputElement>;
     const cardRef = useRef() as MutableRefObject<HTMLDivElement>;
+
     function handleFocus() {
         cardRef.current.style.transform = "rotateY(-180deg)";
     }
     function handleOut() {
         cardRef.current.style.transform = "rotateY(0)";
     }
+    function handleSubmit(event: SyntheticEvent) {
+        event.preventDefault();
+        toast.success("Compra concluída com sucesso!");
+        navigate("/sale");
+    }
     return (
         <>
             <Header />
             <HeaderShop activeFinish />
-            <form className={styles.creditForm}>
+            <form className={styles.creditForm} onSubmit={handleSubmit}>
                 <div className={styles.card} ref={cardRef}>
                     <div className={styles.front}>
                         <img src={chipImg} alt="Chip" className={styles.chip} />
