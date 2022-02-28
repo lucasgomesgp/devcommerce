@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+<div align="center">
+    <img src="./readme/Logo.png" >
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">Ecommerce para Devs</h3>
 
-## Available Scripts
+---
+## :art: Layout
+[Figma](https://www.figma.com/)
 
-In the project directory, you can run:
+---
+## :gear: Techs
+- [ReactJS](https://reactjs.org/)
+- [ReactRouter](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [Yup](https://github.com/jquense/yup)
 
-### `npm start`
+---
+## :book: Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Login
+<div align="center">
+    <img src="./readme/Login.png" >
+</div>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [x] Verificação de email e senha
 
-### `npm test`
+### Início
+<div align="center">
+    <img src="./readme/Home.png" >
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [x] Disponibilização dos itens orioundos de uma API
+- [x] Adição do item selecionado ao carrinho
 
-### `npm run build`
+### Carrinho
+<div align="center">
+    <img src="./readme/Carrinho.png">
+</div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [x] Disponibilização dos itens selecionados antes da compra
+- [x] Adição/remoção de um item do carrinho
+- [x] Alterar quantidade de um item
+### Carrinho vazio
+<div align="center">
+    <img src="./readme/CarrinhoVazio.png" >
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [x] Retorno visual quando elementos não forem inseridos no carrinho
+### Informações
+<div align="center">
+    <img src="./readme/Informacoes.png">
+</div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [x] Barra de acompanhamento da situação da compra, mostrando a área atual
+- [x] Validação dos campos Nome e Sobrenome
+- [x] Consumo de API para buscar informações do CEP digitado
+### Cartão de crédito
+<div align="center">
+    <img src="./readme/CartaoFrente.png" >
+</div>
+<div align="center">
+    <img src="./readme/CartaoTras.png" >
+</div>
 
-### `npm run eject`
+- [x] Validação dos campos com expressões Regex
+- [x] Animações ao entrar e sair do campo CVV
+### Venda
+<div align="center">
+    <img src="./readme/Venda.png" >
+</div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [x] Retorno visual da conclusão da venda
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+## :desktop_computer: Como usar
+- É necesário criar sua API para fornecer os dados da aplicação e preencher como variável de ambiente, com a chave
+```
+    REACT_APP_URL=
+```
+-- Após isso é necessário rodar no terminal o comando abaixo:
+```
+    yarn start
+```
+---
+## :spiral_notepad: License
+Arquivos sob a licença [MIT](https://github.com/lucasgomesgp) criado por Lucas Gomes.
