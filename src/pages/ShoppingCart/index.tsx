@@ -1,8 +1,9 @@
-/* eslint-disable array-callback-return */
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Header } from "../../components/Header";
 import { useShop } from "../../hooks/useShop";
 import emptyImg from "../../assets/empty.svg";
+import { setItem } from "../../storage";
 import styles from "./styles.module.scss";
 
 export function ShoppingCart() {
@@ -10,11 +11,41 @@ export function ShoppingCart() {
     const { items, setItems } = useShop();
     let total = 0;
 
+    function findItem(id: number) {
+        const result = items.filter((item) => item.id !== id);
+        return result;
+    }
+
     function handleRemove(id: number) {
-        const newItems = items.filter((item) => item.id !== id);
-        localStorage.setItem("PRODUCTS", JSON.stringify(newItems));
+        const newItems = findItem(id);
+        setItem("PRODUCTS", [...newItems]);
         setItems(newItems);
     }
+
+    function handleOperation(id: number, type: "sub" | "plus") {
+        const updatedItems = items.map((item) => {
+            if (item.id === id) {
+                if (item.quant === 1 && type === "sub") {
+                    toast.error("Limite mínimo atingido!");
+                    return item;
+                }
+                if (type === "sub") {
+                    return {
+                        ...item,
+                        quant: item.quant ? item.quant - 1 : 1,
+                    };
+                }
+                return {
+                    ...item,
+                    quant: item.quant ? item.quant + 1 : 1,
+                };
+            }
+            return item;
+        });
+        setItem("PRODUCTS", updatedItems);
+        setItems([...updatedItems]);
+    }
+
     return (
         <>
             <Header />
@@ -65,6 +96,9 @@ export function ShoppingCart() {
                                         <button
                                             type="button"
                                             className={`${styles.btnQtd} ${styles.danger}`}
+                                            onClick={() =>
+                                                handleOperation(item.id, "sub")
+                                            }
                                         >
                                             -
                                         </button>
@@ -77,6 +111,12 @@ export function ShoppingCart() {
                                         <button
                                             type="button"
                                             className={`${styles.btnQtd} ${styles.success}`}
+                                            onClick={() => {
+                                                handleOperation(
+                                                    item.id,
+                                                    "plus"
+                                                );
+                                            }}
                                         >
                                             +
                                         </button>

@@ -1,14 +1,18 @@
-/* eslint-disable react/jsx-boolean-value */
 import { MutableRefObject, SyntheticEvent, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { Header } from "../../components/Header";
 import chipImg from "../../assets/chip.png";
-import styles from "./styles.module.scss";
 import { HeaderShop } from "../../components/HeaderShop";
+import styles from "./styles.module.scss";
+import { clear } from "../../storage";
+import { useShop } from "../../hooks/useShop";
+import { cardNumberMask, textMask } from "../../masks";
 
 export function CreditCard() {
     const navigate = useNavigate();
+    const { setItems } = useShop();
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [month, setMonth] = useState("");
@@ -17,16 +21,31 @@ export function CreditCard() {
     const cvvRef = useRef() as MutableRefObject<HTMLInputElement>;
     const cardRef = useRef() as MutableRefObject<HTMLDivElement>;
 
+    const cardSchema = yup.object({
+        cvv: yup.string().required("O CVV é obrigatório"),
+        year: yup.string().required("O ano é obrigatório"),
+        month: yup.string().required("O mês é obrigatório"),
+        name: yup.string().required("O nome no cartão é obrigatório"),
+        number: yup.string().required("O número é obrigatório"),
+    });
+
     function handleFocus() {
         cardRef.current.style.transform = "rotateY(-180deg)";
     }
     function handleOut() {
         cardRef.current.style.transform = "rotateY(0)";
     }
-    function handleSubmit(event: SyntheticEvent) {
+    async function handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
-        toast.success("Compra concluída com sucesso!");
-        navigate("/sale");
+        try {
+            await cardSchema.validate({ name, number, month, year, cvv });
+            toast.success("Compra concluída com sucesso!");
+            clear();
+            setItems([]);
+            navigate("/sale");
+        } catch (err: yup.ValidationError | any) {
+            toast.error(err.message);
+        }
     }
     return (
         <>
@@ -62,29 +81,32 @@ export function CreditCard() {
                     <input
                         className={styles.inpt}
                         type="text"
+                        autoComplete="off"
                         name="number"
                         placeholder="Número do cartão"
                         maxLength={19}
                         value={number}
                         onChange={(event) => {
-                            setNumber(event.target.value);
+                            setNumber(cardNumberMask(event.target.value));
                         }}
                     />
                     <input
                         className={styles.inpt}
                         type="text"
+                        autoComplete="off"
                         name="name"
                         placeholder="Nome no cartão"
                         maxLength={40}
                         value={name}
                         onChange={(event) => {
-                            setName(event.target.value);
+                            setName(textMask(event.target.value));
                         }}
                     />
                     <div className={styles.group}>
                         <input
                             className={styles.inpt}
                             type="text"
+                            autoComplete="off"
                             name="month"
                             placeholder="Mês"
                             value={month}
@@ -96,6 +118,7 @@ export function CreditCard() {
                         <input
                             className={styles.inpt}
                             type="text"
+                            autoComplete="off"
                             name="year"
                             placeholder="Ano"
                             value={year}
@@ -108,6 +131,7 @@ export function CreditCard() {
                     <input
                         className={`${styles.inpt} ${styles.cvvInpt}`}
                         type="text"
+                        autoComplete="off"
                         name="cvv"
                         placeholder="CVV"
                         value={cvv}

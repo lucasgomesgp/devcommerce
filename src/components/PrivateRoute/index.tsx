@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Route, RouteProps, Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 

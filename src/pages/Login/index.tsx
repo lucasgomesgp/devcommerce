@@ -23,7 +23,7 @@ export function Login() {
         event.preventDefault();
         try {
             await schema.validate({ email, password });
-            toast.success("Bem vindo");
+            toast.success("Bem vindo!");
             clear();
             setItem("PRODUCTS", []);
             navigate("/home");

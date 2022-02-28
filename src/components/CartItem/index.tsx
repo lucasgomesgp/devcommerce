@@ -1,7 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-param-reassign */
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
 import { toast } from "react-toastify";
 import { useState } from "react";
 import styles from "./styles.module.scss";
@@ -23,7 +19,6 @@ export function CartItem({ id, from, to, src, name }: Item) {
         }
         if (items.length > 0 && findEqualItemInArray) {
             setQuantCount(quantCount + 1);
-            console.log(quantCount);
             const newArray = items.filter((item) => item.id !== id);
             setItem("PRODUCTS", [
                 ...newArray,

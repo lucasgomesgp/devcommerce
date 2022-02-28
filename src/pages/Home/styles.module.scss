@@ -15,6 +15,7 @@
         position: absolute;
         top: 260px;
     }
+
     .promotion {
         z-index: 5;
     }
@@ -66,6 +67,13 @@
     }
 }
 
+@media screen and (max-width: 368px){
+    .central{
+        &::before{
+            width: 120%;
+        }
+    }
+}
 
 @keyframes turnCircle{
     0%{

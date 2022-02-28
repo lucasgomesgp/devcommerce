@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { Header } from "../../components/Header";
 import { HeaderShop } from "../../components/HeaderShop";
+import { cepMask, textMask } from "../../masks";
 import { cepApi } from "../../service/cep";
 import { Cep } from "./ShoppingCartInfos.types";
 import styles from "./styles.module.scss";
@@ -64,7 +65,7 @@ export function ShoppingCartInfos() {
                             className={`${styles.inptForm} ${styles.inpt}`}
                             autoComplete="off"
                             onChange={(event) => {
-                                setName(event.target.value);
+                                setName(textMask(event.target.value));
                             }}
                             value={name}
                         />
@@ -75,7 +76,7 @@ export function ShoppingCartInfos() {
                             className={`${styles.inptForm} ${styles.inpt}`}
                             autoComplete="off"
                             onChange={(event) => {
-                                setLastName(event.target.value);
+                                setLastName(textMask(event.target.value));
                             }}
                             value={lastName}
                         />
@@ -96,7 +97,7 @@ export function ShoppingCartInfos() {
                                     className={`${styles.inptForm} ${styles.cep}`}
                                     value={cepLocal}
                                     onChange={(event) =>
-                                        setCepLocal(event.target.value)
+                                        setCepLocal(cepMask(event.target.value))
                                     }
                                 />
                             </div>

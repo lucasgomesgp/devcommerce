@@ -13,7 +13,7 @@
 
     .card {
         position: absolute;
-        background: url("../../assets/bg2.jpg") 1%;
+        background: url("../../assets/bg.jpg") 80% 85%;
         padding: 1rem;
         top: -180px;
         min-width: 18rem;
@@ -53,7 +53,7 @@
                 width: 30px;
                 height: 30px;
                 border-radius: 15px;
-                background-color: $black;
+                background-color: $primary;
                 position: absolute;
                 right: 50px;
                 bottom: 60px;
@@ -64,6 +64,7 @@
         .name,
         .monthYear {
             margin-top: 1rem;
+            font-weight: bold;
         }
         .back {
             position: absolute;

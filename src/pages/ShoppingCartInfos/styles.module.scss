@@ -71,7 +71,6 @@
 
     .cepArea {
         display: flex;
-        gap: 12rem;
         flex-wrap: wrap;
         justify-content: space-around;
         width: 65%;
@@ -93,10 +92,9 @@
         align-self: flex-end;
         border: none;
         cursor: pointer;
-        width: 30%;
         padding: 1rem;
         font-size: 1rem;
         font-weight: bold;
-        margin-right: 2rem;
+        margin: 0 auto;
     }
 }
