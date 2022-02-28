@@ -65,13 +65,9 @@
     .mug {
         padding-left: 1rem;
     }
-}
+    .mug{
+        width: 80%;
 
-@media screen and (max-width: 368px){
-    .central{
-        &::before{
-            width: 120%;
-        }
     }
 }
 

@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -21,16 +21,18 @@ export function ShoppingCartInfos() {
         name: yup.string().required("O nome é obrigatório"),
     });
 
-    async function handleSendCep(event?: SyntheticEvent) {
-        event?.preventDefault();
-        try {
-            const { data } = await cepApi.get(`${cepLocal}/json`);
-            setCep(data);
-        } catch (err) {
-            toast.error("Erro ao buscar o CEP");
-        }
-    }
-
+    const handleSendCep = useCallback(
+        async (event?: SyntheticEvent) => {
+            event?.preventDefault();
+            try {
+                const { data } = await cepApi.get(`${cepLocal}/json`);
+                setCep(data);
+            } catch (err) {
+                toast.error("Erro ao buscar o CEP");
+            }
+        },
+        [cepLocal]
+    );
     async function handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
         try {
@@ -48,7 +50,7 @@ export function ShoppingCartInfos() {
         if (cepLocal.length === 0) {
             setCep({} as Cep);
         }
-    }, [cepLocal]);
+    }, [cepLocal, handleSendCep]);
 
     return (
         <>

@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
-import styles from "./styles.module.scss";
 import addCartImg from "../../assets/addCart.svg";
 import { Item } from "../../pages/Home/Home.types";
 import { useShop } from "../../hooks/useShop";
 import { setItem } from "../../storage";
+import styles from "./styles.module.scss";
 
 export function CartItem({ id, from, to, src, name }: Item) {
     const { items, setItems } = useShop();

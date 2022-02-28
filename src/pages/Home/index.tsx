@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import mugImg from "../../assets/coffe.png";
-import styles from "./styles.module.scss";
 import { CartItem } from "../../components/CartItem";
 import { Item } from "./Home.types";
 import { api } from "../../service/api";
+import styles from "./styles.module.scss";
 
 export function Home() {
     const [allItems, setAllItems] = useState<Item[]>([]);

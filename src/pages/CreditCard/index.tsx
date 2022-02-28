@@ -5,10 +5,10 @@ import * as yup from "yup";
 import { Header } from "../../components/Header";
 import chipImg from "../../assets/chip.png";
 import { HeaderShop } from "../../components/HeaderShop";
-import styles from "./styles.module.scss";
 import { clear } from "../../storage";
 import { useShop } from "../../hooks/useShop";
 import { cardNumberMask, textMask } from "../../masks";
+import styles from "./styles.module.scss";
 
 export function CreditCard() {
     const navigate = useNavigate();
