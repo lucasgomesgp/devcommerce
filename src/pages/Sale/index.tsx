@@ -5,6 +5,9 @@ import styles from "./styles.module.scss";
 
 export function Sale() {
     const navigate = useNavigate();
+    function handleHome() {
+        navigate("/home");
+    }
     return (
         <>
             <Header />
@@ -22,7 +25,7 @@ export function Sale() {
                 <section className={styles.button}>
                     <button
                         type="button"
-                        onClick={() => navigate("/home")}
+                        onClick={handleHome}
                         className={styles.btn}
                     >
                         Início

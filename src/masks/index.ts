@@ -15,7 +15,7 @@ function cardNumberMask(number: string) {
 }
 
 function textMask(text: string) {
-    text = text.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
+    text = text.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "").toUpperCase();
     return text;
 }
 

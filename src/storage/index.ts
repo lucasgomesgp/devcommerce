@@ -23,4 +23,8 @@ function clear() {
     localStorage.clear();
 }
 
-export { clear, getItem, setItem, setLogged, getIsLogged };
+function removeItem(item: string) {
+    localStorage.removeItem(item);
+}
+
+export { clear, getItem, removeItem, setItem, setLogged, getIsLogged };

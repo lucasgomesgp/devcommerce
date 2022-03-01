@@ -13,7 +13,9 @@
 
     .card {
         position: absolute;
-        background: url("../../assets/bg.jpg") 80% 85%;
+        background: #9d50bb;
+        background: -webkit-linear-gradient(to right, #6e48aa, #9d50bb);
+        background: linear-gradient(to right, #6e48aa, #9d50bb);
         padding: 1rem;
         top: -180px;
         min-width: 18rem;
@@ -27,8 +29,9 @@
         font-weight: 500;
 
         .chip {
-            max-width: 70px;
-            max-height: 30px;
+            width: 40px;
+            height:30px;
+            margin-top: 1rem;
         }
 
         .front {
@@ -45,7 +48,7 @@
                 border-radius: 15px;
                 background: $white;
                 position: absolute;
-                right: 70px;
+                right: 50px;
                 bottom: 70px;
             }
             &::after {
@@ -55,8 +58,8 @@
                 border-radius: 15px;
                 background-color: $primary;
                 position: absolute;
-                right: 50px;
-                bottom: 60px;
+                right: 30px;
+                bottom: 50px;
             }
         }
 

@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { Header } from "../../components/Header";
 import chipImg from "../../assets/chip.png";
 import { HeaderShop } from "../../components/HeaderShop";
-import { clear } from "../../storage";
+import { removeItem } from "../../storage";
 import { useShop } from "../../hooks/useShop";
-import { cardNumberMask, textMask } from "../../masks";
+import { cardNumberMask, cvvMask, monthYearMask, textMask } from "../../masks";
 import styles from "./styles.module.scss";
 
 export function CreditCard() {
@@ -40,8 +40,8 @@ export function CreditCard() {
         try {
             await cardSchema.validate({ name, number, month, year, cvv });
             toast.success("Compra concluída com sucesso!");
-            clear();
             setItems([]);
+            removeItem("PRODUCTS");
             navigate("/sale");
         } catch (err: yup.ValidationError | any) {
             toast.error(err.message);
@@ -111,7 +111,7 @@ export function CreditCard() {
                             placeholder="Mês"
                             value={month}
                             onChange={(event) => {
-                                setMonth(event.target.value);
+                                setMonth(monthYearMask(event.target.value));
                             }}
                             maxLength={2}
                         />
@@ -123,7 +123,7 @@ export function CreditCard() {
                             placeholder="Ano"
                             value={year}
                             onChange={(event) => {
-                                setYear(event.target.value);
+                                setYear(monthYearMask(event.target.value));
                             }}
                             maxLength={2}
                         />
@@ -136,7 +136,7 @@ export function CreditCard() {
                         placeholder="CVV"
                         value={cvv}
                         onChange={(event) => {
-                            setCvv(event.target.value);
+                            setCvv(cvvMask(event.target.value));
                         }}
                         maxLength={3}
                         onFocus={handleFocus}
