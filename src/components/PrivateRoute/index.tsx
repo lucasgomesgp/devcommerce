@@ -1,12 +1,7 @@
-import { Route, RouteProps, Navigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
+import { getIsLogged } from "../../storage";
 
-export function PrivateRoute<RouteProps>({ ...rest }: RouteProps) {
-    const { isLogged } = useAuth();
-
-    if (!isLogged) {
-        return <Navigate to="/" />;
-    }
-
-    return <Route {...rest} />;
+export function PrivateRoute({ children }: { children: JSX.Element }) {
+    const statusLogin = getIsLogged("user") !== null;
+    return statusLogin ? children : <Navigate to="/" />;
 }

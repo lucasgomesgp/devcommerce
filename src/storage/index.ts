@@ -10,8 +10,17 @@ function setItem(item: string, value: Item | Item[]) {
     localStorage.setItem(item, JSON.stringify(value));
 }
 
+function setLogged(item: string, value: string) {
+    localStorage.setItem(item, value);
+}
+
+function getIsLogged(item: string) {
+    const result = localStorage.getItem(item);
+    return result;
+}
+
 function clear() {
     localStorage.clear();
 }
 
-export { clear, getItem, setItem };
+export { clear, getItem, setItem, setLogged, getIsLogged };

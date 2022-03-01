@@ -4,35 +4,36 @@ import {
     ReactNode,
     SetStateAction,
     useContext,
+    useEffect,
     useMemo,
     useState,
 } from "react";
-
-type User = {
-    email: string;
-    password: string;
-};
+import { getIsLogged } from "../storage";
 
 type UserProps = {
     children: ReactNode;
 };
 
 type UserProviderProps = {
-    user: User;
-    setUser: Dispatch<SetStateAction<User>>;
     isLogged: boolean;
     setIsLogged: Dispatch<SetStateAction<boolean>>;
 };
 export const UserContext = createContext({} as UserProviderProps);
 
 export function UserProvider({ children }: UserProps) {
-    const [user, setUser] = useState<User>({} as User);
     const [isLogged, setIsLogged] = useState(false);
 
     const userStorage = useMemo(
-        () => ({ user, setUser, isLogged, setIsLogged }),
-        [user, setUser, isLogged, setIsLogged]
+        () => ({ isLogged, setIsLogged }),
+        [isLogged, setIsLogged]
     );
+
+    useEffect(() => {
+        const storagedUser = getIsLogged("user");
+        if (storagedUser) {
+            setIsLogged(true);
+        }
+    }, []);
 
     return (
         <UserContext.Provider value={userStorage}>
@@ -42,6 +43,6 @@ export function UserProvider({ children }: UserProps) {
 }
 
 export function useAuth() {
-    const { user, setUser, isLogged, setIsLogged } = useContext(UserContext);
-    return { user, setUser, isLogged, setIsLogged };
+    const { isLogged, setIsLogged } = useContext(UserContext);
+    return { isLogged, setIsLogged };
 }

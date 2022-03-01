@@ -1,14 +1,16 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import * as yup from "yup";
-import { clear, setItem } from "../../storage";
+import { useAuth } from "../../hooks/useAuth";
+import { clear, setItem, setLogged } from "../../storage";
 import styles from "./styles.module.scss";
 
 export function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { setIsLogged, isLogged } = useAuth();
     const schema = yup.object().shape({
         password: yup
             .string()
@@ -25,6 +27,8 @@ export function Login() {
             await schema.validate({ email, password });
             toast.success("Bem vindo!");
             clear();
+            setIsLogged(true);
+            setLogged("user", "logged");
             setItem("PRODUCTS", []);
             navigate("/home");
         } catch (err: yup.ValidationError | any) {
@@ -32,6 +36,11 @@ export function Login() {
         }
     }
 
+    useEffect(() => {
+        if (isLogged) {
+            navigate("/home");
+        }
+    }, [isLogged, navigate]);
     return (
         <main className={styles.container}>
             <ToastContainer />

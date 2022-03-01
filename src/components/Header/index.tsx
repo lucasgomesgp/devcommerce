@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../../assets/logoName.svg";
 import shoppingCartImg from "../../assets/shopping_cart.svg";
+import { useAuth } from "../../hooks/useAuth";
 import { useShop } from "../../hooks/useShop";
 import { clear } from "../../storage";
 import styles from "./styles.module.scss";
@@ -12,6 +13,7 @@ export function Header() {
     const navigate = useNavigate();
     const { items } = useShop();
     const [status, setStatus] = useState(true);
+    const { setIsLogged } = useAuth();
     const menuAreaRef = useRef() as MutableRefObject<HTMLUListElement>;
 
     function handleToggle() {
@@ -27,6 +29,7 @@ export function Header() {
 
     function handleLogout() {
         clear();
+        setIsLogged(false);
         toast.success("Logout com sucesso!");
         navigate("/");
     }
