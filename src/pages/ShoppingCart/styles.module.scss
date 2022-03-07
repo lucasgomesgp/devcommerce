@@ -90,7 +90,6 @@
         }
 
         .emptyImg {
-            width: 20%;
             margin: 0 auto;
         }
         button {
@@ -98,8 +97,7 @@
             padding: 1rem;
             border: none;
             cursor: pointer;
-            width: 20%;
-            margin: 2rem auto;
+            margin: 1rem auto;
             color: #fff;
             font-size: 1.4rem;
         }
@@ -126,4 +124,13 @@
             cursor: pointer;
         }
     }
+}
+
+@media screen and (max-width: 768px) {
+    .empty{
+        .emptyImg{
+            width: 50%;
+        }
+    }
+
 }

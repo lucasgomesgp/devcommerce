@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { HeaderShopProps } from "./HeaderShop.types";
 import styles from "./styles.module.scss";
 
@@ -9,28 +10,29 @@ export function HeaderShop({
     return (
         <ul className={styles.shopMenu}>
             <li className={styles.item}>
-                <a
-                    href="/shop"
+                <Link
+                    to="/shop"
                     className={`${activeCart ? styles.active : ""}`}
+                    data-testid="cart"
                 >
                     Carrinho
-                </a>
+                </Link>
             </li>
             <li className={styles.item}>
-                <a
-                    href="/info"
+                <Link
+                    to="/info"
                     className={`${activeInfo ? styles.active : ""}`}
                 >
                     Entrega
-                </a>
+                </Link>
             </li>
             <li className={styles.item}>
-                <a
-                    href="/card"
+                <Link
+                    to="/card"
                     className={`${activeFinish ? styles.active : ""}`}
                 >
                     Finalização
-                </a>
+                </Link>
             </li>
         </ul>
     );

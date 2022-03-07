@@ -73,6 +73,7 @@ export function CreditCard() {
                             disabled
                             className={styles.cvv}
                             value={cvv}
+                            data-cy="cvv"
                         />
                     </div>
                 </div>
@@ -134,6 +135,7 @@ export function CreditCard() {
                         autoComplete="off"
                         name="cvv"
                         placeholder="CVV"
+                        data-testid="cvv"
                         value={cvv}
                         onChange={(event) => {
                             setCvv(cvvMask(event.target.value));
@@ -143,7 +145,11 @@ export function CreditCard() {
                         onBlur={handleOut}
                         ref={cvvRef}
                     />
-                    <button type="submit" className={styles.btnSuccess}>
+                    <button
+                        type="submit"
+                        className={styles.btnSuccess}
+                        data-cy="done"
+                    >
                         Finalizar
                     </button>
                 </div>

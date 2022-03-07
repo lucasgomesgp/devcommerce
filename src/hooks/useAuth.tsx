@@ -3,12 +3,15 @@ import {
     Dispatch,
     ReactNode,
     SetStateAction,
+    useCallback,
     useContext,
     useEffect,
     useMemo,
     useState,
 } from "react";
-import { getIsLogged } from "../storage";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { clear, getIsLogged, getItem } from "../storage";
 
 type UserProps = {
     children: ReactNode;
@@ -17,15 +20,23 @@ type UserProps = {
 type UserProviderProps = {
     isLogged: boolean;
     setIsLogged: Dispatch<SetStateAction<boolean>>;
+    handleLogout: () => void;
 };
 export const UserContext = createContext({} as UserProviderProps);
 
 export function UserProvider({ children }: UserProps) {
     const [isLogged, setIsLogged] = useState(false);
+    const navigate = useNavigate();
 
+    const handleLogout = useCallback(() => {
+        clear();
+        toast.success("Logout com sucesso!");
+        setIsLogged(false);
+        navigate("/");
+    }, [navigate]);
     const userStorage = useMemo(
-        () => ({ isLogged, setIsLogged }),
-        [isLogged, setIsLogged]
+        () => ({ isLogged, setIsLogged, handleLogout }),
+        [isLogged, setIsLogged, handleLogout]
     );
 
     useEffect(() => {
@@ -34,15 +45,9 @@ export function UserProvider({ children }: UserProps) {
             setIsLogged(true);
         }
     }, []);
-
     return (
         <UserContext.Provider value={userStorage}>
             {children}
         </UserContext.Provider>
     );
-}
-
-export function useAuth() {
-    const { isLogged, setIsLogged } = useContext(UserContext);
-    return { isLogged, setIsLogged };
 }

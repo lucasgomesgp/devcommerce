@@ -58,7 +58,10 @@ export function ShoppingCart() {
                                 className={styles.item}
                                 key={`${item.id}.${Math.random() * 100}`}
                             >
-                                <div className={styles.itemInfo}>
+                                <div
+                                    className={styles.itemInfo}
+                                    data-cy="items-section"
+                                >
                                     <div className={styles.itemImg}>
                                         <img
                                             src={item.src}
@@ -89,13 +92,14 @@ export function ShoppingCart() {
                                             Remover
                                         </button>
                                     </div>
-                                    <div className={styles.qtd}>
+                                    <div className={styles.qtd} data-cy="qtd">
                                         <p className={styles.qtdText}>
                                             Quantidade
                                         </p>
                                         <button
                                             type="button"
                                             className={`${styles.btnQtd} ${styles.danger}`}
+                                            data-testid="sub"
                                             onClick={() =>
                                                 handleOperation(item.id, "sub")
                                             }
@@ -111,6 +115,7 @@ export function ShoppingCart() {
                                         <button
                                             type="button"
                                             className={`${styles.btnQtd} ${styles.success}`}
+                                            data-testid="plus"
                                             onClick={() => {
                                                 handleOperation(
                                                     item.id,

@@ -58,6 +58,7 @@ export function CartItem({ id, from, to, src, name }: Item) {
                 type="button"
                 className={styles.btnCart}
                 onClick={handleSendItem}
+                data-cy="btnCart"
             >
                 <img src={addCartImg} alt="Adicionar ao carrinho" />
                 <span>Adicionar ao carrinho</span>

@@ -1,10 +1,10 @@
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, useContext, useRef, useState } from "react";
 import { MdExitToApp } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../../assets/logoName.svg";
 import shoppingCartImg from "../../assets/shopping_cart.svg";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/Auth";
 import { useShop } from "../../hooks/useShop";
 import { clear } from "../../storage";
 import styles from "./styles.module.scss";
@@ -13,7 +13,7 @@ export function Header() {
     const navigate = useNavigate();
     const { items } = useShop();
     const [status, setStatus] = useState(true);
-    const { setIsLogged } = useAuth();
+    const { handleLogout } = useAuth();
     const menuAreaRef = useRef() as MutableRefObject<HTMLUListElement>;
 
     function handleToggle() {
@@ -27,18 +27,13 @@ export function Header() {
         setStatus(!status);
     }
 
-    function handleLogout() {
-        clear();
-        setIsLogged(false);
-        toast.success("Logout com sucesso!");
-        navigate("/");
-    }
     return (
         <>
             <header className={styles.header}>
                 <button
                     type="button"
                     className={styles.nav}
+                    data-testid="homebtn"
                     onClick={() => {
                         navigate("/home");
                     }}
@@ -50,9 +45,14 @@ export function Header() {
                         type="button"
                         onClick={() => navigate("/shop")}
                         className={styles.shop}
+                        data-testid="shop"
+                        data-cy="shop"
                     >
-                        {items.length ? (
-                            <div className={styles.itemCount}>
+                        {items?.length ? (
+                            <div
+                                className={styles.itemCount}
+                                data-testid="item-count"
+                            >
                                 {items.length}
                             </div>
                         ) : (
@@ -64,6 +64,7 @@ export function Header() {
                         type="button"
                         className={styles.logoutBtn}
                         onClick={handleLogout}
+                        data-testid="logout"
                     >
                         <MdExitToApp
                             className={styles.logout}
@@ -76,19 +77,32 @@ export function Header() {
                     type="button"
                     onClick={handleToggle}
                     className={styles.btnMenu}
+                    data-testid="hamburger"
                 >
                     <span className={styles.hamburger_menu} />
                 </button>
             </header>
-            <ul className={styles.hamburger} ref={menuAreaRef}>
+            <ul
+                className={styles.hamburger}
+                ref={menuAreaRef}
+                aria-hidden={status}
+            >
                 <li className={styles.item}>
-                    <a href="/home">Início</a>
+                    <Link to="/home" data-testid="home_hamburger">
+                        Início
+                    </Link>
                 </li>
                 <li className={styles.item}>
-                    <a href="/shop">Carrinho</a>
+                    <Link to="/shop" data-testid="shop_hamburger">
+                        Carrinho
+                    </Link>
                 </li>
                 <li className={styles.item}>
-                    <button type="button" onClick={handleLogout}>
+                    <button
+                        type="button"
+                        onClick={handleLogout}
+                        data-testid="logout_hamburger"
+                    >
                         Sair
                     </button>
                 </li>

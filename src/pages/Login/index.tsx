@@ -1,8 +1,9 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import * as yup from "yup";
-import { useAuth } from "../../hooks/useAuth";
+import { Input } from "../../components/Input";
+import { UserContext } from "../../hooks/useAuth";
 import { clear, setItem, setLogged } from "../../storage";
 import styles from "./styles.module.scss";
 
@@ -10,7 +11,7 @@ export function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { setIsLogged, isLogged } = useAuth();
+    const { isLogged, setIsLogged } = useContext(UserContext);
     const schema = yup.object().shape({
         password: yup
             .string()
@@ -43,7 +44,6 @@ export function Login() {
     }, [isLogged, navigate]);
     return (
         <main className={styles.container}>
-            <ToastContainer />
             <form onSubmit={handleSubmit} className={styles.form}>
                 <svg
                     width="74"
@@ -71,20 +71,22 @@ export function Login() {
                     </g>
                 </svg>
 
-                <input
+                <Input
                     type="text"
                     name="email"
                     placeholder="Email"
                     className={styles.inpt}
                     autoComplete="off"
                     value={email}
+                    data-testid="email"
                     onChange={(event) => {
                         setEmail(event.currentTarget.value);
                     }}
                 />
-                <input
+                <Input
                     type="password"
                     name="password"
+                    data-testid="password"
                     placeholder="Senha"
                     className={styles.inpt}
                     autoComplete="off"

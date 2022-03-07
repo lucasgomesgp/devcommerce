@@ -96,6 +96,7 @@ export function ShoppingCartInfos() {
                                     type="search"
                                     placeholder="CEP"
                                     maxLength={9}
+                                    data-cy="cep"
                                     className={`${styles.inptForm} ${styles.cep}`}
                                     value={cepLocal}
                                     onChange={(event) =>
@@ -129,6 +130,7 @@ export function ShoppingCartInfos() {
                     type="submit"
                     className={styles.sendBtn}
                     onClick={handleSubmit}
+                    data-cy="send"
                 >
                     Continuar
                 </button>

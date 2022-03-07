@@ -32,21 +32,6 @@
         }
     }
 
-    .inpt {
-        width: 80%;
-        padding: 1rem;
-        border-radius: 10px;
-        border: 1px solid $black;
-        outline: none;
-        font-size: 1rem;
-        font-weight: bold;
-
-        &::placeholder {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-    }
-
     .btnLogin {
         background-color: $primary;
         color: $white;

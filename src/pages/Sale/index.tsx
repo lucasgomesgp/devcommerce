@@ -27,6 +27,7 @@ export function Sale() {
                         type="button"
                         onClick={handleHome}
                         className={styles.btn}
+                        data-cy="home"
                     >
                         Início
                     </button>

@@ -10,14 +10,14 @@ import "./global.scss";
 
 ReactDOM.render(
     <React.StrictMode>
-        <UserProvider>
-            <ShopProvider>
-                <BrowserRouter>
+        <BrowserRouter>
+            <ToastContainer position="top-right" autoClose={1500} />
+            <UserProvider>
+                <ShopProvider>
                     <App />
-                    <ToastContainer position="top-right" autoClose={1500} />
-                </BrowserRouter>
-            </ShopProvider>
-        </UserProvider>
+                </ShopProvider>
+            </UserProvider>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")
 );
